@@ -1,6 +1,12 @@
 
 package mcassist;
 
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.UIManager;
+
 /**
  *
  * @author alexis
@@ -13,6 +19,16 @@ public class IHM extends javax.swing.JFrame {
     public IHM() {
         initComponents();
         loadItems();
+        
+        steps = new ArrayList();
+        
+        Step step = new Step();
+        Step step2 = new Step();
+        
+        steps.add(step);
+        steps.add(step2);
+
+        updateList();
     }
 
     /**
@@ -24,17 +40,22 @@ public class IHM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        stepScroll = new javax.swing.JScrollPane();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
+            .addComponent(stepScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(stepScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
@@ -50,19 +71,9 @@ public class IHM extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(IHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -90,7 +101,21 @@ public class IHM extends javax.swing.JFrame {
     private void loadItems() {
         
     }
+    
+    private void updateList() {
+        Container cont = new Container();
+        
+        for(Step step : steps) {
+            cont.add(step);
+        }
+        
+        cont.setLayout(new BoxLayout(cont, BoxLayout.PAGE_AXIS));
+        stepScroll.setViewportView(cont);
+    }
+    
+    private ArrayList<Step> steps;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane stepScroll;
     // End of variables declaration//GEN-END:variables
 }
