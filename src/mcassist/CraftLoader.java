@@ -47,7 +47,7 @@ public class CraftLoader {
 
         while(keySetIterator.hasNext()){
             Integer key = keySetIterator.next();
-            items.get(key).addCraft(new Craft());
+            //items.get(key).addCraft(new Craft(items));
             System.out.println("key: " + key + " value: " + items.get(key).getName());
         }
 
