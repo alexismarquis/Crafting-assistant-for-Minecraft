@@ -29,7 +29,7 @@ public class Item {
         return this.name;
     }
     
-    public ArrayList getCrafts() {
+    public ArrayList<Craft> getCrafts() {
         return this.crafts;
     }
     
