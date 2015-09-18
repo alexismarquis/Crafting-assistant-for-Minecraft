@@ -1,0 +1,77 @@
+{
+	"items": {
+		"4": {
+			"name":"Cobblestone",
+			"icon":"res/icon/cobblestone.png",
+			"crafts": []
+		},
+		"12": {
+			"name":"Sand",
+			"icon":"res/icon/sand.png",
+			"crafts": []
+		},
+		"17": {
+			"name":"Log",
+			"icon":"res/icon/log.png",
+			"crafts": []
+		},
+		"20": {
+			"name":"Glass",
+			"icon":"res/icon/glass.png",
+			"crafts": [
+				{
+					"type":"furnace",
+					"input":[
+						 12
+					],
+					"output":1
+				}
+			]
+		},
+		"5": {
+			"name":"Wood planks",
+			"icon":"res/icon/wood.png",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						 17,  0,  0,
+						  0,  0,  0,
+						  0,  0,  0,
+					],
+					"output":4
+				}
+			]
+		},
+		"280": {
+			"name":"Stick",
+			"icon":"res/icon/stick.png",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						  5,  0,  0,
+						  5,  0,  0,
+						  0,  0,  0,
+					],
+					"output":4
+				}
+			]
+		},
+		"274": {
+			"name":"Stone pickaxe",
+			"icon":"res/icon/stone_picaxe.png",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						  4,  4,  4,
+						  0,280,  0,
+						  0,280,  0,
+					],
+					"output":1
+				}
+			]
+		}
+	}
+}
