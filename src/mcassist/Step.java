@@ -6,6 +6,8 @@
 
 package mcassist;
 
+import javax.swing.JLabel;
+
 /**
  *
  * @author am728605
@@ -15,8 +17,9 @@ public class Step extends javax.swing.JPanel {
     /**
      * Creates new form Step
      */
-    public Step() {
+    public Step() { 
         initComponents();
+        
     }
 
     /**
@@ -28,32 +31,29 @@ public class Step extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        image = new javax.swing.JLabel();
+        stepLabel = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(153, 255, 153));
+        setBackground(new java.awt.Color(204, 204, 204));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setPreferredSize(new java.awt.Dimension(276, 180));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("HEY");
+        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/Crafting_GUI.png"))); // NOI18N
+        add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(jLabel1)
-                .addContainerGap(200, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jLabel1)
-                .addContainerGap(104, Short.MAX_VALUE))
-        );
+        stepLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        stepLabel.setText("Etape X");
+        add(stepLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel image;
+    private javax.swing.JLabel stepLabel;
     // End of variables declaration//GEN-END:variables
+
+    void setStepNumber(int index) {
+        stepLabel.setText("Etape " + index);
+    }
 }

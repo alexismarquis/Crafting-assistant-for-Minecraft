@@ -1,7 +1,10 @@
 
 package mcassist;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
@@ -22,12 +25,15 @@ public class IHM extends javax.swing.JFrame {
         
         steps = new ArrayList();
         
-        Step step = new Step();
-        Step step2 = new Step();
+        Step ewan = new Step();
         
-        steps.add(step);
-        steps.add(step2);
-
+        steps.add(ewan);
+        
+                Step ewan2 = new Step();
+        
+        steps.add(ewan2);
+        
+        
         updateList();
     }
 
@@ -41,21 +47,47 @@ public class IHM extends javax.swing.JFrame {
     private void initComponents() {
 
         stepScroll = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
+        itemsScroll = new javax.swing.JScrollPane();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Crafting assistant for Minecraft");
+
+        jLabel2.setText("Item sélectionné :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(stepScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(stepScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(itemsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(stepScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(stepScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                    .addComponent(itemsScroll)))
         );
 
         pack();
@@ -99,14 +131,35 @@ public class IHM extends javax.swing.JFrame {
     }
     
     private void loadItems() {
+        Container cont = new Container();
         
+        cont.add(new ItemView());
+        cont.add(new ItemView());
+        cont.add(new ItemView());
+        cont.add(new ItemView());
+        cont.add(new ItemView());
+        cont.add(new ItemView());
+        cont.add(new ItemView());
+        cont.add(new ItemView());
+        cont.add(new ItemView());
+        cont.add(new ItemView());
+        cont.add(new ItemView());
+
+        cont.add(new ItemView());
+
+        cont.setLayout(new GridLayout(0, 3, 0, 0));
+        itemsScroll.setViewportView(cont);
     }
     
     private void updateList() {
         Container cont = new Container();
         
+        int index = 1;
+        
         for(Step step : steps) {
+            step.setStepNumber(index);
             cont.add(step);
+            index++;
         }
         
         cont.setLayout(new BoxLayout(cont, BoxLayout.PAGE_AXIS));
@@ -116,6 +169,9 @@ public class IHM extends javax.swing.JFrame {
     private ArrayList<Step> steps;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane itemsScroll;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane stepScroll;
     // End of variables declaration//GEN-END:variables
 }
