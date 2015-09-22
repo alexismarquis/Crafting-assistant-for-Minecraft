@@ -12,24 +12,21 @@ import java.util.HashMap;
  * @author alexis
  */
 public class Craft {
-   private Item[][] items;
+   private Item[] items;
     
-    public Craft(Item[][] items) {
+    public Craft(Item[] items) {
         this.items = items;
     }
     public String toString(){
         String affiche = "";
         for (int i = 0; i < items.length; i++) {
-            for (int j = 0; j < items[i].length; j++) {
-                if (items[i][j] != null) {
-                     affiche += "\n"+items[i][j].getName();
-                }
-            }
+            if (items[i] != null) {
+                 affiche += "\n"+items[i].getName();
+            }    
         }
         return affiche;
     }
         
-    
     
     public HashMap<Item,Integer> listRessource(HashMap<Item,Integer> liste){
         HashMap<Item,Integer> listeR;
@@ -40,20 +37,18 @@ public class Craft {
             listeR = liste;
         }
         for (int i = 0; i < items.length; i++) {
-            for (int j = 0; j < items[i].length ; j++) {
-                if (items[i][j].isRessource()) {
-                    if (listeR.containsKey(items[i][j])) {
-                        listeR.put(items[i][j], listeR.get(items[i][j]) + 1);
+                if (items[i].isRessource()) {
+                    if (listeR.containsKey(items[i])) {
+                        listeR.put(items[i], listeR.get(items[i]) + 1);
                     }
                     else{
-                        listeR.put(items[i][j], 1);
+                        listeR.put(items[i], 1);
                     }
                 }
                 else{
-                    Craft c = items[i][j].getCrafts().get(0);
+                    Craft c = items[i].getCrafts().get(0);
                     listeR = c.listRessource(listeR);
-                }
-                }
+                }   
             }
         return listeR;
    }
