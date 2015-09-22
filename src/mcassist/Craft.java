@@ -57,7 +57,6 @@ public class Craft {
         }
         
         for (int i = 0; i < items.length; i++) {
-            Craft currentCraft=items[i].getCrafts().get(0);
                 if (items[i].isRessource()) {
                     if (listeR.containsKey(items[i])) {       
                         listeR.put(items[i], listeR.get(items[i]) + 1);
@@ -67,6 +66,7 @@ public class Craft {
                     }
                 }
                 else{
+                    Craft currentCraft=items[i].getCrafts().get(0);
                     if (coffret.containsKey(items[i])) {
                         coffret.put(items[i],coffret.get(items[i])-1);
                         //Voir apres debug
