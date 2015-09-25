@@ -97,4 +97,12 @@ public class Craft {
         }
         return listeR; //Retourne la liste des items nécessaire au craft et leurs nombre
    }
+    public HashMap<Item,Integer> StepByStep(HashMap<Item,Integer> liste){
+        for (int i = 0; i < items.length; i++) {
+            if (!items[i].isRessource()) {
+                
+            }
+        }
+        return liste;//A enlever
+    }
 }
