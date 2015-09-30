@@ -20,15 +20,6 @@ public class CraftLoader {
     
     HashMap<String, Item> items = new HashMap<>();
     
-    public static void main(String [] args) {
-        CraftLoader cl = new CraftLoader();
-        try {
-            cl.loadCraftsFromFile("C:\\VPC\\crafts.json");
-        } catch (JSONException | IOException ex) {
-            Logger.getLogger(CraftLoader.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     /**
      * 
      * @return a hashMap of items organized by id

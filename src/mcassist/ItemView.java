@@ -6,6 +6,8 @@
 
 package mcassist;
 
+import java.awt.Color;
+
 /**
  *
  * @author am728605
@@ -15,8 +17,10 @@ public class ItemView extends javax.swing.JPanel {
     /**
      * Creates new form ItemView
      */
-    public ItemView() {
+    public ItemView(Item item, String id) {
         initComponents();
+        this.item = item;
+        this.jLabel1.setText(id);
     }
 
     /**
@@ -33,26 +37,57 @@ public class ItemView extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(50, 50));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                formMouseExited(evt);
+            }
+        });
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("123");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 40, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 40, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 34, Short.MAX_VALUE)
+                .addComponent(jLabel1))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        if(!active) {
+            setBackground(new Color(255, 255, 0));
+        }
+    }//GEN-LAST:event_formMouseEntered
 
+    private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
+        if(!active) {
+            setBackground(new Color(255, 255, 255));
+        }
+    }//GEN-LAST:event_formMouseExited
+
+    
+    public void setActive(boolean active) {
+        this.active = active;
+        
+        if(active) {
+            setBackground(Color.red);
+        } else {
+            setBackground(Color.white);
+        }
+    }
+    
+    private Item item;
+    private boolean active = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

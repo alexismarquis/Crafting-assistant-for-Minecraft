@@ -7,9 +7,13 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import javax.swing.BoxLayout;
 import javax.swing.UIManager;
+import org.json.JSONException;
 
 /**
  *
@@ -136,8 +140,21 @@ public class IHM extends javax.swing.JFrame {
     private void loadItems() {
         Container cont = new Container();
         itemViews.clear();
-        /*for (int i = 0; i < 10; i++) {
-            final ItemView iv = new ItemView();
+        
+        CraftLoader cl = new CraftLoader();
+
+        try {
+            cl.loadCraftsFromFile("C:\\VPC\\crafts.json");
+        } catch (JSONException | IOException ex) {
+        }
+        
+      
+        for(Entry<String, Item> entry : cl.getItems().entrySet()) {
+            String id = entry.getKey();
+            Item item = entry.getValue();
+
+    
+            final ItemView iv = new ItemView(item, id);
 
             iv.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -150,7 +167,7 @@ public class IHM extends javax.swing.JFrame {
 
             cont.add(iv);
             itemViews.add(iv);
-        }*/
+        }
 
 
 
