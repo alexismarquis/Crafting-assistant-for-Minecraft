@@ -86,6 +86,10 @@ public class ItemView extends javax.swing.JPanel {
         }
     }
     
+    public Item getItem() {
+        return this.item;
+    }
+    
     private Item item;
     private boolean active = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
