@@ -7,9 +7,14 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.UIManager;
+import org.json.JSONException;
 
 /**
  *
@@ -17,6 +22,8 @@ import javax.swing.UIManager;
  */
 public class IHM extends javax.swing.JFrame {
 
+    CraftLoader cl = new CraftLoader();
+    
     /**
      * Creates new form IHM
      */
@@ -25,6 +32,17 @@ public class IHM extends javax.swing.JFrame {
         itemViews = new ArrayList();
 
         loadItems();
+
+        try {
+            cl.loadCraftsFromFile("C:\\VPC\\crafts.json");
+        } catch (JSONException | IOException ex) {
+            Logger.getLogger(CraftLoader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        Item item = cl.getItems().get("274");;
+        HashMap<Item, Integer> yolo = item.getCrafts().get(0).listRessource(new HashMap<Item, Integer>(), new HashMap<Item, Integer>());
         
         steps = new ArrayList();
         
