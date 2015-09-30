@@ -36,5 +36,8 @@ public class Item {
     public boolean isRessource() {
         return this.crafts.isEmpty();
     }
-            
+    
+    public String toString(){
+        return name;
+    }
 }

@@ -74,6 +74,10 @@ public class Craft {
      * @return HashMap<Item,Integer>
      * @author JulienVannier
      */
+    public HashMap<Item,Integer> listRessource(){
+         return listRessource(new HashMap<Item,Integer>(),new HashMap<Item,Integer>());
+    }
+    
     public HashMap<Item,Integer> listRessource(HashMap<Item,Integer> liste,HashMap<Item,Integer> coffre){
         HashMap<Item,Integer> listeR; //HashMap Contenant la liste des item necessaire et leurs nombres
         HashMap<Item,Integer>coffret; //HashMap contenant les items en trops
@@ -92,8 +96,14 @@ public class Craft {
                         listeR = ajouterListe(listeR,i);
                     }
                     else{ //Si non contenu dans le coffre on doit craft l'item
-                        if (currentCraft.getNbCraft()>1) {//Si le craft de cette item nous donne plusieur de cette item
-                            coffret.put(items[i],coffret.get(items[i])+currentCraft.getNbCraft()-1);//Ajout au coffre
+                        if (currentCraft.getNbCraft()>1) {//Si le craft de cette item nous donne plusieurs de cette item
+                            if (coffret.containsKey(items[i])) {
+                                coffret.put(items[i],coffret.get(items[i])+currentCraft.getNbCraft()-1);//Ajout au coffre
+                            }
+                            else{
+                                coffret.put(items[i], currentCraft.getNbCraft()-1);
+                            }
+                            listeR = ajouterListe(listeR,i);
                         }
                         listeR = currentCraft.listRessource(listeR,coffret);//Appel fonction en récursif
                     }
@@ -102,7 +112,8 @@ public class Craft {
         }
         return listeR; //Retourne la liste des items nécessaire au craft et leurs nombre
    }
-    public HashMap<Item,Integer> StepByStepItem(HashMap<Item,Integer> liste){
+    public HashMap<Item,Integer> StepByStepItem(){
+        HashMap<Item,Integer> liste = listRessource();
         HashMap<Item,Integer> listeItem = new HashMap<Item,Integer>();
         Set<Item> listKeys=liste.keySet();  // Obtenir la liste des clés
     	Iterator iterateur=listKeys.iterator();
@@ -116,7 +127,8 @@ public class Craft {
         return listeItem;
     }
     
-    public HashMap<Item,Integer> StepByStepRessource(HashMap<Item,Integer> liste){
+    public HashMap<Item,Integer> StepByStepRessource(){
+        HashMap<Item,Integer> liste = listRessource();
         HashMap<Item,Integer> listeRessource = new HashMap<Item,Integer>();
         Set<Item> listKeys=liste.keySet();  // Obtenir la liste des clés
     	Iterator iterateur=listKeys.iterator();
