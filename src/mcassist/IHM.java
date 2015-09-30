@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import javax.swing.BoxLayout;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 import org.json.JSONException;
 
@@ -26,6 +27,8 @@ public class IHM extends javax.swing.JFrame {
      */
     public IHM() {
         initComponents();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         itemViews = new ArrayList();
 
         loadItems();
@@ -57,14 +60,20 @@ public class IHM extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         itemsScroll = new javax.swing.JScrollPane();
         jLabel2 = new javax.swing.JLabel();
+        selectedItemLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Crafting Assistant for Minecraft");
+        setLocationByPlatform(true);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Crafting assistant for Minecraft");
 
         jLabel2.setText("Item sélectionné :");
+
+        selectedItemLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        selectedItemLabel.setText("--");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,13 +84,15 @@ public class IHM extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(itemsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(selectedItemLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -90,7 +101,9 @@ public class IHM extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(selectedItemLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(stepScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
@@ -162,6 +175,7 @@ public class IHM extends javax.swing.JFrame {
                         currentItemView.setActive(false);
                     }
                     iv.setActive(true);
+                    selectedItemLabel.setText(iv.getItem().getName());
                 }
             });
 
@@ -192,12 +206,12 @@ public class IHM extends javax.swing.JFrame {
     
     private ArrayList<Step> steps;
     private ArrayList<ItemView> itemViews;
-
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane itemsScroll;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel selectedItemLabel;
     private javax.swing.JScrollPane stepScroll;
     // End of variables declaration//GEN-END:variables
 }
