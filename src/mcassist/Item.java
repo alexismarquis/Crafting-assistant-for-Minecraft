@@ -14,10 +14,13 @@ import java.util.ArrayList;
 public class Item {
     
     private String name;
+    private String id;
+    
     private ArrayList<Craft> crafts;
     
-    public Item(String name) {
+    public Item(String id, String name) {
         this.name = name;
+        this.id = id;
         this.crafts = new ArrayList();
     } 
     
@@ -27,6 +30,10 @@ public class Item {
     
     public String getName() {
         return this.name;
+    }
+    
+    public String getId() {
+        return this.id;
     }
     
     public ArrayList<Craft> getCrafts() {

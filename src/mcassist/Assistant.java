@@ -46,7 +46,7 @@ public class Assistant {
     private ArrayList loadItems() {
         ArrayList<Item> items = new ArrayList();
         
-        items.add(new Item("Test"));
+        items.add(new Item("salut", "Test"));
         
         return items;
     }

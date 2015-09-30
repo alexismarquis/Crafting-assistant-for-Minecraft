@@ -17,9 +17,31 @@ public class Step extends javax.swing.JPanel {
     /**
      * Creates new form Step
      */
-    public Step() { 
+    public Step(Item item) { 
         initComponents();
+
+        itemNameLabel.setText(item.getName());
+           
+        JLabel resultLabel = new JLabel();
+        resultLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/items/" + item.getId() + "-0.png")));
+        add(resultLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 78, -1, -1));  
+        setComponentZOrder(resultLabel, 0);
+
+        Craft craft = item.getCrafts().get(0); //TODO: improve
         
+        int index = 0;
+        for(Item i : craft.getItems()) {
+            if(i != null) {
+                JLabel label = new JLabel();
+                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/items/" + i.getId() + "-0.png")));
+                add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(184 + (index % 3 * 36), 44 + ((index / 3) * 36), -1, -1));  
+                setComponentZOrder(label, 0);
+
+            }
+
+            index++;
+        }
+
     }
 
     /**
@@ -33,6 +55,7 @@ public class Step extends javax.swing.JPanel {
 
         image = new javax.swing.JLabel();
         stepLabel = new javax.swing.JLabel();
+        itemNameLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -45,11 +68,15 @@ public class Step extends javax.swing.JPanel {
         stepLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         stepLabel.setText("Etape X");
         add(stepLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        itemNameLabel.setText("Item");
+        add(itemNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 150, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel image;
+    private javax.swing.JLabel itemNameLabel;
     private javax.swing.JLabel stepLabel;
     // End of variables declaration//GEN-END:variables
 

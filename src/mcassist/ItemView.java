@@ -17,10 +17,13 @@ public class ItemView extends javax.swing.JPanel {
     /**
      * Creates new form ItemView
      */
-    public ItemView(Item item, String id) {
+    public ItemView(Item item) {
         initComponents();
         this.item = item;
-        this.jLabel1.setText(id);
+        this.jLabel1.setText(item.getId());
+        
+        itemImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/items/" + item.getId() + "-0.png"))); // NOI18N
+
     }
 
     /**
@@ -33,9 +36,10 @@ public class ItemView extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        itemImageLabel = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setBackground(new java.awt.Color(240, 240, 240));
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setPreferredSize(new java.awt.Dimension(50, 50));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -48,30 +52,41 @@ public class ItemView extends javax.swing.JPanel {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("123");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        itemImageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        itemImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/items/1-1.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(itemImageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 34, Short.MAX_VALUE)
-                .addComponent(jLabel1))
+                .addContainerGap()
+                .addComponent(itemImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
         if(!active) {
-            setBackground(new Color(255, 255, 0));
+            setBackground(new Color(241, 196, 15));
         }
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
         if(!active) {
-            setBackground(new Color(255, 255, 255));
+            setBackground(new Color(240, 240, 240));
         }
     }//GEN-LAST:event_formMouseExited
 
@@ -80,9 +95,9 @@ public class ItemView extends javax.swing.JPanel {
         this.active = active;
         
         if(active) {
-            setBackground(Color.red);
+            setBackground(new Color(52, 152, 219));
         } else {
-            setBackground(Color.white);
+            setBackground(new Color(240, 240, 240));
         }
     }
     
@@ -93,6 +108,7 @@ public class ItemView extends javax.swing.JPanel {
     private Item item;
     private boolean active = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel itemImageLabel;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -46,7 +46,7 @@ public class CraftLoader {
             String key = (String)keys.next();
             //System.out.println(key);
             if ( obj.getJSONObject("items").get(key) instanceof JSONObject ) {
-                items.put(key, new Item(obj.getJSONObject("items").getJSONObject(key).getString("name")));
+                items.put(key, new Item(key, obj.getJSONObject("items").getJSONObject(key).getString("name")));
             }
         }
         

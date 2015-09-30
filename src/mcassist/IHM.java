@@ -1,11 +1,7 @@
 
 package mcassist;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,6 +33,7 @@ public class IHM extends javax.swing.JFrame {
         
                 
         updateList();
+
     }
 
     /**
@@ -56,11 +53,12 @@ public class IHM extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crafting Assistant for Minecraft");
+        setBackground(new java.awt.Color(255, 255, 250));
         setLocationByPlatform(true);
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Crafting assistant for Minecraft");
+        jLabel1.setFont(new java.awt.Font("Menlo", 1, 18)); // NOI18N
+        jLabel1.setText("Crafting Assistant for Minecraft");
 
         jLabel2.setText("Item sélectionné :");
 
@@ -76,23 +74,23 @@ public class IHM extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(itemsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(selectedItemLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(selectedItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(selectedItemLabel))
@@ -143,18 +141,17 @@ public class IHM extends javax.swing.JFrame {
             Integer quantity = entry.getValue();
             Item stepItem = entry.getKey();
             
-            addStep(stepItem.getCrafts().get(0));
-            System.out.println(stepItem.getName());
+            addStep(stepItem);
         }
         
-        addStep(item.getCrafts().get(0));
+        addStep(item);
         
         updateList();
     }
     
-    private void addStep(Craft craft) {
-        Step step = new Step();
-        
+    private void addStep(Item item) {
+        Step step = new Step(item);
+      
         steps.add(step);
     }
     
@@ -165,7 +162,8 @@ public class IHM extends javax.swing.JFrame {
         CraftLoader cl = new CraftLoader();
 
         try {
-            cl.loadCraftsFromFile("C:\\VPC\\crafts.json");
+            //cl.loadCraftsFromFile("C:\\VPC\\crafts.json");
+            cl.loadCraftsFromFile("crafts.json");
         } catch (JSONException | IOException ex) {
         }
         
@@ -176,7 +174,7 @@ public class IHM extends javax.swing.JFrame {
 
             if(!item.isRessource()) {
 
-                final ItemView iv = new ItemView(item, id);
+                final ItemView iv = new ItemView(item);
 
                 iv.addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -197,7 +195,7 @@ public class IHM extends javax.swing.JFrame {
 
 
         cont.setLayout(new GridLayout(0, 3, 0, 0));
-        itemsScroll.setViewportView(cont);        
+        itemsScroll.setViewportView(cont);
     }
     
     private void updateList() {

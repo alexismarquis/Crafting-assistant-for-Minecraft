@@ -32,6 +32,10 @@ public class Craft {
         return nbCraft;
     }
     
+    public Item[] getItems() {
+        return items;
+    }
+    
     public String toString(){
         String affiche = "";
         for (int i = 0; i < items.length; i++) {
