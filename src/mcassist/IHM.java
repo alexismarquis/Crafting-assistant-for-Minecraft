@@ -2,6 +2,7 @@
 package mcassist;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
@@ -21,6 +22,8 @@ public class IHM extends javax.swing.JFrame {
      */
     public IHM() {
         initComponents();
+        itemViews = new ArrayList();
+
         loadItems();
         
         steps = new ArrayList();
@@ -132,23 +135,27 @@ public class IHM extends javax.swing.JFrame {
     
     private void loadItems() {
         Container cont = new Container();
-        
-        cont.add(new ItemView());
-        cont.add(new ItemView());
-        cont.add(new ItemView());
-        cont.add(new ItemView());
-        cont.add(new ItemView());
-        cont.add(new ItemView());
-        cont.add(new ItemView());
-        cont.add(new ItemView());
-        cont.add(new ItemView());
-        cont.add(new ItemView());
-        cont.add(new ItemView());
+        itemViews.clear();
+        for (int i = 0; i < 10; i++) {
+            final ItemView iv = new ItemView();
 
-        cont.add(new ItemView());
+            iv.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseReleased(java.awt.event.MouseEvent evt) {
+                    for(ItemView currentItemView : itemViews) {
+                        currentItemView.setActive(false);
+                    }
+                    iv.setActive(true);
+                }
+            });
+
+            cont.add(iv);
+            itemViews.add(iv);
+        }
+
+
 
         cont.setLayout(new GridLayout(0, 3, 0, 0));
-        itemsScroll.setViewportView(cont);
+        itemsScroll.setViewportView(cont);        
     }
     
     private void updateList() {
@@ -167,7 +174,9 @@ public class IHM extends javax.swing.JFrame {
     }
     
     private ArrayList<Step> steps;
+    private ArrayList<ItemView> itemViews;
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane itemsScroll;
     private javax.swing.JLabel jLabel1;
