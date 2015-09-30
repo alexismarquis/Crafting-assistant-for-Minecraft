@@ -5,7 +5,10 @@
  */
 package mcassist;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  *
@@ -77,32 +80,53 @@ public class Craft {
         listeR = init(liste); //Initialisation
         coffret = init(coffre);    
         for (int i = 0; i < items.length; i++) {//Parcours des 9 case composant un craft
-            if (items[i].isRessource()) { //Si l'item est une ressource
-                listeR = ajouterListe(listeR,i);
-            }
-            else{
-                Craft currentCraft=items[i].getCrafts().get(0);//Permet d'obtenir le craft de l'item current
-                if (coffret.containsKey(items[i]) && coffret.get(items[i]) != 0) { //On regarde si l'item est contenu dans le coffre et si la quantité n'est pas égale a 0
-                    coffret.put(items[i],coffret.get(items[i])-1); // Si oui on retire une fois l'item dans le coffre
-                    //Voir apres debug
+            if (items[i] != null){
+                if (items[i].isRessource()) { //Si l'item est une ressource
                     listeR = ajouterListe(listeR,i);
                 }
-                else{ //Si non contenu dans le coffre on doit craft l'item
-                    if (currentCraft.getNbCraft()>1) {//Si le craft de cette item nous donne plusieur de cette item
-                        coffret.put(items[i],coffret.get(items[i])+currentCraft.getNbCraft()-1);//Ajout au coffre
+                else{
+                    Craft currentCraft=items[i].getCrafts().get(0);//Permet d'obtenir le craft de l'item current
+                    if (coffret.containsKey(items[i]) && coffret.get(items[i]) != 0) { //On regarde si l'item est contenu dans le coffre et si la quantité n'est pas égale a 0
+                        coffret.put(items[i],coffret.get(items[i])-1); // Si oui on retire une fois l'item dans le coffre
+                        //Voir apres debug
+                        listeR = ajouterListe(listeR,i);
                     }
-                    listeR = currentCraft.listRessource(listeR,coffret);//Appel fonction en récursif
+                    else{ //Si non contenu dans le coffre on doit craft l'item
+                        if (currentCraft.getNbCraft()>1) {//Si le craft de cette item nous donne plusieur de cette item
+                            coffret.put(items[i],coffret.get(items[i])+currentCraft.getNbCraft()-1);//Ajout au coffre
+                        }
+                        listeR = currentCraft.listRessource(listeR,coffret);//Appel fonction en récursif
+                    }
                 }
-            }   
+            }
         }
         return listeR; //Retourne la liste des items nécessaire au craft et leurs nombre
    }
-    public HashMap<Item,Integer> StepByStep(HashMap<Item,Integer> liste){
-        for (int i = 0; i < items.length; i++) {
-            if (!items[i].isRessource()) {
-                
-            }
-        }
-        return liste;//A enlever
+    public HashMap<Item,Integer> StepByStepItem(HashMap<Item,Integer> liste){
+        HashMap<Item,Integer> listeItem = new HashMap<Item,Integer>();
+        Set<Item> listKeys=liste.keySet();  // Obtenir la liste des clés
+    	Iterator iterateur=listKeys.iterator();
+        while(iterateur.hasNext())
+    		{
+                    Item key= (Item)iterateur.next();
+                    if (!key.isRessource()) {
+                        listeItem.put(key, liste.get(key));
+                    }
+    		}
+        return listeItem;
+    }
+    
+    public HashMap<Item,Integer> StepByStepRessource(HashMap<Item,Integer> liste){
+        HashMap<Item,Integer> listeRessource = new HashMap<Item,Integer>();
+        Set<Item> listKeys=liste.keySet();  // Obtenir la liste des clés
+    	Iterator iterateur=listKeys.iterator();
+        while(iterateur.hasNext())
+    		{
+                    Item key= (Item)iterateur.next();
+                    if (key.isRessource()) {
+                        listeRessource.put(key, liste.get(key));
+                    }
+    		}
+        return listeRessource;
     }
 }
