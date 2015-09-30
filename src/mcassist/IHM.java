@@ -35,15 +35,7 @@ public class IHM extends javax.swing.JFrame {
         
         steps = new ArrayList();
         
-        Step ewan = new Step();
-        
-        steps.add(ewan);
-        
-                Step ewan2 = new Step();
-        
-        steps.add(ewan2);
-        
-        
+                
         updateList();
     }
 
@@ -143,11 +135,27 @@ public class IHM extends javax.swing.JFrame {
     }
     
     public void setItem(Item item) {
+        selectedItemLabel.setText(item.getName());
+        steps.clear();
+        HashMap<Item, Integer> items = item.getCrafts().get(0).StepByStepItem();
         
+        for(Entry<Item, Integer> entry : items.entrySet()) {
+            Integer quantity = entry.getValue();
+            Item stepItem = entry.getKey();
+            
+            addStep(stepItem.getCrafts().get(0));
+            System.out.println(stepItem.getName());
+        }
+        
+        addStep(item.getCrafts().get(0));
+        
+        updateList();
     }
     
     private void addStep(Craft craft) {
+        Step step = new Step();
         
+        steps.add(step);
     }
     
     private void loadItems() {
@@ -166,21 +174,24 @@ public class IHM extends javax.swing.JFrame {
             String id = entry.getKey();
             Item item = entry.getValue();
 
-    
-            final ItemView iv = new ItemView(item, id);
+            if(!item.isRessource()) {
 
-            iv.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseReleased(java.awt.event.MouseEvent evt) {
-                    for(ItemView currentItemView : itemViews) {
-                        currentItemView.setActive(false);
+                final ItemView iv = new ItemView(item, id);
+
+                iv.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseReleased(java.awt.event.MouseEvent evt) {
+                        for(ItemView currentItemView : itemViews) {
+                            currentItemView.setActive(false);
+                        }
+                        iv.setActive(true);
+                        setItem(iv.getItem());
                     }
-                    iv.setActive(true);
-                    selectedItemLabel.setText(iv.getItem().getName());
-                }
-            });
+                });
 
-            cont.add(iv);
-            itemViews.add(iv);
+                cont.add(iv);
+                itemViews.add(iv);
+                                
+            }
         }
 
 
