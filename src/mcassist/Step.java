@@ -6,6 +6,7 @@
 
 package mcassist;
 
+import java.awt.Color;
 import javax.swing.JLabel;
 
 /**
@@ -24,23 +25,45 @@ public class Step extends javax.swing.JPanel {
            
         JLabel resultLabel = new JLabel();
         resultLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/items/" + item.getId() + "-0.png")));
-        add(resultLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 78, -1, -1));  
-        setComponentZOrder(resultLabel, 0);
-
+        
         Craft craft = item.getCrafts().get(0); //TODO: improve
         
-        int index = 0;
-        for(Item i : craft.getItems()) {
-            if(i != null) {
-                JLabel label = new JLabel();
-                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/items/" + i.getId() + "-0.png")));
-                add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(184 + (index % 3 * 36), 44 + ((index / 3) * 36), -1, -1));  
-                setComponentZOrder(label, 0);
+        if(craft.getType().equals("furnace") && craft.getItems().length == 1) {
+            image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/Furnace_GUI.png")));
+            add(resultLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 78, -1, -1));  
+            
+            Item i = craft.getItems()[0];
+            JLabel label = new JLabel();
+            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/items/" + i.getId() + "-0.png")));
+            add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 44, -1, -1));  
+            setComponentZOrder(label, 0);
 
+        } else {
+            add(resultLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 78, -1, -1));  
+
+            if(craft.getNbCraft() > 1) {
+                JLabel resultQuantityLabel = new JLabel();
+                resultQuantityLabel.setText(String.valueOf(craft.getNbCraft()));
+                resultQuantityLabel.setForeground(Color.white);
+                add(resultQuantityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 102, -1, -1));  
+                setComponentZOrder(resultQuantityLabel, 0);    
             }
 
-            index++;
+            int index = 0;
+            for(Item i : craft.getItems()) {
+                if(i != null) {
+                    JLabel label = new JLabel();
+                    label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/items/" + i.getId() + "-0.png")));
+                    add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(184 + (index % 3 * 36), 44 + ((index / 3) * 36), -1, -1));  
+                    setComponentZOrder(label, 0);
+
+                }
+
+                index++;
+            }
         }
+        
+        setComponentZOrder(resultLabel, 0);        
 
     }
 
@@ -66,7 +89,7 @@ public class Step extends javax.swing.JPanel {
         add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
 
         stepLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        stepLabel.setText("Etape X");
+        stepLabel.setText("Step X");
         add(stepLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         itemNameLabel.setText("Item");
@@ -81,6 +104,6 @@ public class Step extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     void setStepNumber(int index) {
-        stepLabel.setText("Etape " + index);
+        stepLabel.setText("Step " + index);
     }
 }

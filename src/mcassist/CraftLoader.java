@@ -65,7 +65,7 @@ public class CraftLoader {
                     craftItems[j] = items.get(jsonCraftItems.getString(j)); 
                     //if(craftItems[j] != null) System.out.println(craftItems[j].getName());
                 }
-                items.get(key).addCraft(new Craft(craftItems, crafts.getJSONObject(i).getInt("output")));
+                items.get(key).addCraft(new Craft(craftItems, crafts.getJSONObject(i).getInt("output"), crafts.getJSONObject(i).getString("type")));
             }
             //System.out.println("---");
         }

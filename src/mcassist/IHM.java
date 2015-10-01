@@ -29,6 +29,7 @@ public class IHM extends javax.swing.JFrame {
 
         loadItems();
         
+        resources = new ArrayList();
         steps = new ArrayList();
         
                 
@@ -50,6 +51,11 @@ public class IHM extends javax.swing.JFrame {
         itemsScroll = new javax.swing.JScrollPane();
         jLabel2 = new javax.swing.JLabel();
         selectedItemLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        resourcesScroll = new javax.swing.JScrollPane();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crafting Assistant for Minecraft");
@@ -60,10 +66,18 @@ public class IHM extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Menlo", 1, 18)); // NOI18N
         jLabel1.setText("Crafting Assistant for Minecraft");
 
-        jLabel2.setText("Item sélectionné :");
+        jLabel2.setText("Selected item :");
 
         selectedItemLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         selectedItemLabel.setText("--");
+
+        jLabel3.setText("Needed resources :");
+
+        jLabel4.setText("Alexis MARQUIS");
+
+        jLabel5.setText("Julien VANNIER");
+
+        jLabel6.setText("Florian PREVOST");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,29 +86,52 @@ public class IHM extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(stepScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(itemsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+                .addComponent(itemsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(selectedItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(selectedItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(resourcesScroll)
+                        .addGap(294, 294, 294))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(selectedItemLabel))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(selectedItemLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(resourcesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(stepScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                     .addComponent(itemsScroll)))
@@ -135,6 +172,7 @@ public class IHM extends javax.swing.JFrame {
     public void setItem(Item item) {
         selectedItemLabel.setText(item.getName());
         steps.clear();
+        resources.clear();
         HashMap<Item, Integer> items = item.getCrafts().get(0).StepByStepItem();
         
         for(Entry<Item, Integer> entry : items.entrySet()) {
@@ -146,6 +184,18 @@ public class IHM extends javax.swing.JFrame {
         
         addStep(item);
         
+        HashMap<Item, Integer> resList = item.getCrafts().get(0).StepByStepRessource();
+        
+        for(Entry<Item, Integer> entry : resList.entrySet()) {
+            Integer quantity = entry.getValue();
+            Item stepItem = entry.getKey();
+            
+            ResourceView rv = new ResourceView(stepItem, quantity);
+            
+            resources.add(rv);
+        }
+        
+        
         updateList();
     }
     
@@ -154,6 +204,7 @@ public class IHM extends javax.swing.JFrame {
       
         steps.add(step);
     }
+    
     
     private void loadItems() {
         Container cont = new Container();
@@ -211,15 +262,31 @@ public class IHM extends javax.swing.JFrame {
         
         cont.setLayout(new BoxLayout(cont, BoxLayout.PAGE_AXIS));
         stepScroll.setViewportView(cont);
+        
+        Container resCont = new Container();
+        
+        for(ResourceView resource : resources) {
+            resCont.add(resource);
+        }
+        
+        resCont.setLayout(new BoxLayout(resCont, BoxLayout.LINE_AXIS));
+        resourcesScroll.setViewportView(resCont);
+        
     }
     
     private ArrayList<Step> steps;
+    private ArrayList<ResourceView> resources;
     private ArrayList<ItemView> itemViews;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane itemsScroll;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane resourcesScroll;
     private javax.swing.JLabel selectedItemLabel;
     private javax.swing.JScrollPane stepScroll;
     // End of variables declaration//GEN-END:variables

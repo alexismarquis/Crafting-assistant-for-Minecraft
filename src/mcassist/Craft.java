@@ -17,15 +17,21 @@ import java.util.Set;
 public class Craft {
    private Item[] items;
    private int nbCraft;
+   private String type;
     
-    public Craft(Item[] items,int nbCraft) {
+    public Craft(Item[] items,int nbCraft, String type) {
         this.items = items;
         this.nbCraft = nbCraft;
+        this.type = type;
     }
     
     public Craft(Item[] items){
         this.items=items;
         this.nbCraft = 1;
+    }
+    
+    public String getType() {
+        return type;
     }
     
     public int getNbCraft(){
