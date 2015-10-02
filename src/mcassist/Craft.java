@@ -6,7 +6,6 @@
 package mcassist;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
@@ -55,7 +54,7 @@ public class Craft {
     
     public LinkedHashMap<Item,Integer> init(LinkedHashMap<Item,Integer> map){
         if (map.isEmpty()) {
-            return new LinkedHashMap<Item,Integer>();
+            return new LinkedHashMap<>();
         }
             return map;      
     }
@@ -126,31 +125,25 @@ public class Craft {
    }
     public LinkedHashMap<Item,Integer> StepByStepItem(){
         LinkedHashMap<Item,Integer> liste = listRessource();
-        LinkedHashMap<Item,Integer> listeItem = new LinkedHashMap<Item,Integer>();
+        LinkedHashMap<Item,Integer> listeItem = new LinkedHashMap<>();
         Set<Item> listKeys=liste.keySet();  // Obtenir la liste des clés
-    	Iterator iterateur=listKeys.iterator();
-        while(iterateur.hasNext())
-    		{
-                    Item key= (Item)iterateur.next();
-                    if (!key.isRessource()) {
-                        listeItem.put(key, liste.get(key));
-                    }
-    		}
+        for (Item key : listKeys) {
+            if (!key.isRessource()) {
+                listeItem.put(key, liste.get(key));
+            }
+        }
         return listeItem;
     }
     
     public HashMap<Item,Integer> StepByStepRessource(){
         LinkedHashMap<Item,Integer> liste = listRessource();
-        LinkedHashMap<Item,Integer> listeRessource = new LinkedHashMap<Item,Integer>();
+        LinkedHashMap<Item,Integer> listeRessource = new LinkedHashMap<>();
         Set<Item> listKeys=liste.keySet();  // Obtenir la liste des clés
-    	Iterator iterateur=listKeys.iterator();
-        while(iterateur.hasNext())
-    		{
-                    Item key= (Item)iterateur.next();
-                    if (key.isRessource()) {
-                        listeRessource.put(key, liste.get(key));
-                    }
-    		}
+        for (Item key : listKeys) {
+            if (key.isRessource()) {
+                listeRessource.put(key, liste.get(key));
+            }
+        }
         return listeRessource;
     }
 }

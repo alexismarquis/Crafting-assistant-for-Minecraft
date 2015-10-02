@@ -39,7 +39,7 @@ public class ItemView extends javax.swing.JPanel {
         itemImageLabel = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        setPreferredSize(new java.awt.Dimension(50, 80));
+        setPreferredSize(new java.awt.Dimension(50, 75));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
