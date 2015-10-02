@@ -24,11 +24,6 @@ public class Craft {
         this.type = type;
     }
     
-    public Craft(Item[] items){
-        this.items=items;
-        this.nbCraft = 1;
-    }
-    
     public String getType() {
         return type;
     }
