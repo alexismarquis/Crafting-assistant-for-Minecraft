@@ -27,6 +27,11 @@ public class Step extends javax.swing.JPanel {
         resultLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/items/" + item.getId() + "-0.png")));
         
         Craft craft = item.getCrafts().get(0); //TODO: improve
+
+        int resultQuantity = (quantity/craft.getNbCraft())*craft.getNbCraft();
+        int itemQuantity = resultQuantity/craft.getNbCraft();
+                            System.out.println(itemQuantity);
+
         
         if(craft.getType().equals("furnace") && craft.getItems().length == 1) {
             image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/Furnace_GUI.png")));
@@ -41,9 +46,9 @@ public class Step extends javax.swing.JPanel {
         } else {
             add(resultLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 78, -1, -1));  
 
-            if(craft.getNbCraft() > 1) {
+            if(resultQuantity > 1) {
                 JLabel resultQuantityLabel = new JLabel();
-                resultQuantityLabel.setText(String.valueOf(craft.getNbCraft()));
+                resultQuantityLabel.setText(String.valueOf(resultQuantity));
                 resultQuantityLabel.setForeground(Color.white);
                 add(resultQuantityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 102, -1, -1));  
                 setComponentZOrder(resultQuantityLabel, 0);    
@@ -57,6 +62,14 @@ public class Step extends javax.swing.JPanel {
                     add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(184 + (index % 3 * 36), 44 + ((index / 3) * 36), -1, -1));  
                     setComponentZOrder(label, 0);
 
+                    if(itemQuantity > 1) {
+                        JLabel quantityLabel = new JLabel();
+                        quantityLabel.setText(String.valueOf(itemQuantity));
+                        quantityLabel.setForeground(Color.white);
+                        add(quantityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(206 + (index % 3 * 36), 60 + ((index / 3) * 36), -1, -1));  
+                        setComponentZOrder(quantityLabel, 0);
+
+                    }
                 }
 
                 index++;

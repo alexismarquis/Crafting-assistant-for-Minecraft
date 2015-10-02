@@ -96,8 +96,8 @@
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="stepScroll" pref="320" max="32767" attributes="0"/>
-                  <Component id="itemsScroll" max="32767" attributes="0"/>
+                  <Component id="stepScroll" min="-2" pref="320" max="-2" attributes="0"/>
+                  <Component id="itemsScroll" min="-2" pref="320" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
