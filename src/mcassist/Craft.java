@@ -113,8 +113,8 @@ public class Craft {
                             else{
                                 coffret.put(items[i], currentCraft.getNbCraft()-1);
                             }
-                            listeR = ajouterListe(listeR,i);
                         }
+                        listeR = ajouterListe(listeR,i);
                         listeR = currentCraft.listRessource(listeR,coffret);//Appel fonction en récursif
                     }
                 }

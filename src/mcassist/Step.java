@@ -18,7 +18,7 @@ public class Step extends javax.swing.JPanel {
     /**
      * Creates new form Step
      */
-    public Step(Item item) { 
+    public Step(Item item, Integer quantity) { 
         initComponents();
 
         itemNameLabel.setText(item.getName());
