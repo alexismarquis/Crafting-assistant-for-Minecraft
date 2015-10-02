@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -82,7 +84,7 @@ public class IHM extends javax.swing.JFrame {
 
         jLabel6.setText("Florian PREVOST");
 
-        jLabel7.setText("Difficulté :");
+        jLabel7.setText("Dificulty :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,11 +101,10 @@ public class IHM extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(selectedItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(resourcesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7)))
+                    .addComponent(resourcesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectedItemLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(14, 14, 14)
@@ -219,12 +220,17 @@ public class IHM extends javax.swing.JFrame {
         
         CraftLoader cl = new CraftLoader();
 
-        try {
-            //cl.loadCraftsFromFile("C:\\VPC\\crafts.json");
+       /* try {
             cl.loadCraftsFromFile("crafts.json");
         } catch (JSONException | IOException ex) {
-        }
+        }*/
         
+        try {
+            cl.loadFromFile("crafts.json");
+        } catch (IOException ex) {
+            Logger.getLogger(IHM.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
       
         for(Entry<String, Item> entry : cl.getItems().entrySet()) {
             String id = entry.getKey();

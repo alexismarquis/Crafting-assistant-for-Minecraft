@@ -5,9 +5,9 @@
  */
 package mcassist;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Set;
 
 /**
@@ -42,6 +42,7 @@ public class Craft {
         return items;
     }
     
+   @Override
     public String toString(){
         String affiche = "";
         for (int i = 0; i < items.length; i++) {
@@ -52,9 +53,9 @@ public class Craft {
         return affiche;
     }
     
-    public HashMap<Item,Integer> init(HashMap<Item,Integer> map){
+    public LinkedHashMap<Item,Integer> init(LinkedHashMap<Item,Integer> map){
         if (map.isEmpty()) {
-            return new HashMap<Item,Integer>();
+            return new LinkedHashMap<Item,Integer>();
         }
             return map;      
     }
@@ -66,8 +67,8 @@ public class Craft {
      * @return HashMap<Item,Integer>
      * @author JulienVannier
      */
-    public HashMap<Item,Integer> ajouterListe(HashMap<Item,Integer> map,int i){
-        HashMap<Item,Integer> test= map;
+    public LinkedHashMap<Item,Integer> ajouterListe(LinkedHashMap<Item,Integer> map,int i){
+        LinkedHashMap<Item,Integer> test= map;
         if (map.containsKey(items[i])) { //Si la essource apparait déja dans la liste
             test.put(items[i], test.get(items[i]) + 1); //on incrémente le nombre de cette ressource
         }
@@ -84,13 +85,13 @@ public class Craft {
      * @return HashMap<Item,Integer>
      * @author JulienVannier
      */
-    public HashMap<Item,Integer> listRessource(){
-         return listRessource(new HashMap<Item,Integer>(),new HashMap<Item,Integer>());
+    public LinkedHashMap<Item,Integer> listRessource(){
+         return listRessource(new LinkedHashMap<Item,Integer>(),new LinkedHashMap<Item,Integer>());
     }
     
-    public HashMap<Item,Integer> listRessource(HashMap<Item,Integer> liste,HashMap<Item,Integer> coffre){
-        HashMap<Item,Integer> listeR; //HashMap Contenant la liste des item necessaire et leurs nombres
-        HashMap<Item,Integer>coffret; //HashMap contenant les items en trops
+    private LinkedHashMap<Item,Integer> listRessource(LinkedHashMap<Item,Integer> liste,LinkedHashMap<Item,Integer> coffre){
+        LinkedHashMap<Item,Integer> listeR; //HashMap Contenant la liste des item necessaire et leurs nombres
+        LinkedHashMap<Item,Integer>coffret; //HashMap contenant les items en trops
         listeR = init(liste); //Initialisation
         coffret = init(coffre);    
         for (int i = 0; i < items.length; i++) {//Parcours des 9 case composant un craft
@@ -99,7 +100,7 @@ public class Craft {
                     listeR = ajouterListe(listeR,i);
                 }
                 else{
-                    Craft currentCraft=items[i].getCrafts().get(0);//Permet d'obtenir le craft de l'item current
+                    Craft currentCraft = items[i].getCrafts().get(0);//Permet d'obtenir le craft de l'item current
                     if (coffret.containsKey(items[i]) && coffret.get(items[i]) != 0) { //On regarde si l'item est contenu dans le coffre et si la quantité n'est pas égale a 0
                         coffret.put(items[i],coffret.get(items[i])-1); // Si oui on retire une fois l'item dans le coffre
                         //Voir apres debug
@@ -114,17 +115,18 @@ public class Craft {
                                 coffret.put(items[i], currentCraft.getNbCraft()-1);
                             }
                         }
-                        listeR = ajouterListe(listeR,i);
                         listeR = currentCraft.listRessource(listeR,coffret);//Appel fonction en récursif
+                        listeR = ajouterListe(listeR,i);
+
                     }
                 }
             }
         }
         return listeR; //Retourne la liste des items nécessaire au craft et leurs nombre
    }
-    public HashMap<Item,Integer> StepByStepItem(){
-        HashMap<Item,Integer> liste = listRessource();
-        HashMap<Item,Integer> listeItem = new HashMap<Item,Integer>();
+    public LinkedHashMap<Item,Integer> StepByStepItem(){
+        LinkedHashMap<Item,Integer> liste = listRessource();
+        LinkedHashMap<Item,Integer> listeItem = new LinkedHashMap<Item,Integer>();
         Set<Item> listKeys=liste.keySet();  // Obtenir la liste des clés
     	Iterator iterateur=listKeys.iterator();
         while(iterateur.hasNext())
@@ -138,8 +140,8 @@ public class Craft {
     }
     
     public HashMap<Item,Integer> StepByStepRessource(){
-        HashMap<Item,Integer> liste = listRessource();
-        HashMap<Item,Integer> listeRessource = new HashMap<Item,Integer>();
+        LinkedHashMap<Item,Integer> liste = listRessource();
+        LinkedHashMap<Item,Integer> listeRessource = new LinkedHashMap<Item,Integer>();
         Set<Item> listKeys=liste.keySet();  // Obtenir la liste des clés
     	Iterator iterateur=listKeys.iterator();
         while(iterateur.hasNext())

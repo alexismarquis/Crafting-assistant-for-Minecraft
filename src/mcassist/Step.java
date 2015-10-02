@@ -29,8 +29,9 @@ public class Step extends javax.swing.JPanel {
         Craft craft = item.getCrafts().get(0); //TODO: improve
 
         int resultQuantity = (quantity/craft.getNbCraft())*craft.getNbCraft();
+        if(resultQuantity == 0) resultQuantity = craft.getNbCraft();
+
         int itemQuantity = resultQuantity/craft.getNbCraft();
-                            System.out.println(itemQuantity);
 
         
         if(craft.getType().equals("furnace") && craft.getItems().length == 1) {
@@ -65,7 +66,7 @@ public class Step extends javax.swing.JPanel {
                     if(itemQuantity > 1) {
                         JLabel quantityLabel = new JLabel();
                         quantityLabel.setText(String.valueOf(itemQuantity));
-                        quantityLabel.setForeground(Color.white);
+                        quantityLabel.setForeground(Color.white);                        
                         add(quantityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(206 + (index % 3 * 36), 60 + ((index / 3) * 36), -1, -1));  
                         setComponentZOrder(quantityLabel, 0);
 

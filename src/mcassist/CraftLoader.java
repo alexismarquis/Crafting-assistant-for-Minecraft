@@ -1,16 +1,14 @@
 package mcassist;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonObject.Member;
+import com.eclipsesource.json.JsonValue;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -18,56 +16,56 @@ import org.json.JSONObject;
  */
 public class CraftLoader {
     
-    HashMap<String, Item> items = new HashMap<>();
+    LinkedHashMap<String, Item> items = new LinkedHashMap<>();
     
     /**
      * 
      * @return a hashMap of items organized by id
      */
-    public HashMap<String, Item> getItems() {
+    public LinkedHashMap<String, Item> getItems() {
         return items;
     }
     
-    /**
-     * Load the craft list from the file located at path
-     * @param path
-     * @throws JSONException
-     * @throws IOException 
-     */
-    public void loadCraftsFromFile(String path) throws JSONException, IOException {
-        String str = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
-        JSONObject obj = new JSONObject(str);
+    
+    public void loadFromFile(String path) throws FileNotFoundException, IOException {
+        FileReader reader = new FileReader(path);
+        JsonObject object = Json.parse(reader).asObject();
+        
+        JsonObject jsonItems = object.get("items").asObject();
 
         items.clear();
         
-        Iterator<?> keys = obj.getJSONObject("items").keys();
-        
-        while( keys.hasNext() ) {
-            String key = (String)keys.next();
-            //System.out.println(key);
-            if ( obj.getJSONObject("items").get(key) instanceof JSONObject ) {
-                items.put(key, new Item(key, obj.getJSONObject("items").getJSONObject(key).getString("name")));
-            }
-        }
-        
-        keys = obj.getJSONObject("items").keys();
-
-        while( keys.hasNext() ){
-            String key = (String)keys.next();
-            JSONArray crafts = obj.getJSONObject("items").getJSONObject(key).getJSONArray("crafts");
+        for (Member member : jsonItems) {
+            String id = member.getName();
+            JsonObject jsonItem = member.getValue().asObject();
+            String name = jsonItem.get("name").asString();
             
-            //System.out.println("Item id: " + key + " Name: " + items.get(key).getName());
-            for(int i = 0; i < crafts.length(); i++) { // For each craft
-                //System.out.println("Crafted with: ");
-                JSONArray jsonCraftItems = crafts.getJSONObject(i).getJSONArray("input");
-                Item[] craftItems = new Item[jsonCraftItems.length()];
-                for(int j = 0; j < jsonCraftItems.length(); j++) { // For each item in craft
-                    craftItems[j] = items.get(jsonCraftItems.getString(j)); 
-                    //if(craftItems[j] != null) System.out.println(craftItems[j].getName());
-                }
-                items.get(key).addCraft(new Craft(craftItems, crafts.getJSONObject(i).getInt("output"), crafts.getJSONObject(i).getString("type")));
-            }
-            //System.out.println("---");
+            items.put(id, new Item(id, name));
         }
-    }  
+        
+        for (Member member : jsonItems) {
+            String id = member.getName();
+            JsonArray jsonCrafts = member.getValue().asObject().get("crafts").asArray();  
+            
+            for (JsonValue value : jsonCrafts) {
+                JsonObject jsonCraft = value.asObject();
+                String type = jsonCraft.get("type").asString();
+                Integer output = jsonCraft.get("output").asInt();
+                JsonArray jsonInput = jsonCraft.get("input").asArray();
+                
+                Item[] craftItems = new Item[jsonInput.size()];
+                
+                int i = 0;
+                for (JsonValue craftValue : jsonInput) {
+                    craftItems[i] = items.get(craftValue.asString());
+                    i++;
+                }
+
+                items.get(id).addCraft(new Craft(craftItems, output, type));
+
+            }
+        }
+
+    }
+    
 }
