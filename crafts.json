@@ -1,36 +1,31 @@
 {
 	"items": {
-		"4": {
-			"name":"Cobblestone",
-			"icon":"res/icon/cobblestone.png",
-			"crafts": []
-		},
-		"12": {
-			"name":"Sand",
-			"icon":"res/icon/sand.png",
-			"crafts": []
-		},
-		"17": {
-			"name":"Log",
-			"icon":"res/icon/log.png",
-			"crafts": []
-		},
-		"20": {
-			"name":"Glass",
-			"icon":"res/icon/glass.png",
+		"1": {
+			"name":"Stone",
 			"crafts": [
 				{
 					"type":"furnace",
 					"input":[
-						"12"
+						"4"
 					],
 					"output":1
 				}
 			]
 		},
+		"2": {
+			"name":"Grass",
+			"crafts": []
+		},
+		"3": {
+			"name":"Dirt",
+			"crafts": []
+		},
+		"4": {
+			"name":"Cobblestone",
+			"crafts": []
+		},
 		"5": {
 			"name":"Wood planks",
-			"icon":"res/icon/wood.png",
 			"crafts": [
 				{
 					"type":"workbench",
@@ -43,9 +38,158 @@
 				}
 			]
 		},
+		"12": {
+			"name":"Sand",
+			"crafts": []
+		},
+		"14": {
+			"name":"Gold Ore",
+			"crafts": []
+		},
+		"15": {
+			"name":"Iron Ore",
+			"crafts": []
+		},
+		"16": {
+			"name":"Coal Ore",
+			"crafts": []
+		},
+		"17": {
+			"name":"Log",
+			"crafts": []
+		},
+		"20": {
+			"name":"Glass",
+			"crafts": [
+				{
+					"type":"furnace",
+					"input":[
+						"12"
+					],
+					"output":1
+				}
+			]
+		},
+		"21": {
+			"name":"Lapis Lazuli Ore",
+			"crafts": []
+		},
+		"22": {
+			"name":"Lapis Lazuli Block",
+			"crafts": []
+		},
+		"23": {
+			"name":"Dispenser",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						  "4",  "4",  "4",
+						  "4","261",  "4",
+						  "4","331",  "4",
+					],
+					"output":1
+				}
+			]
+		},
+		"24": {
+			"name":"Sandstone",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						 "12", "12",  "0",
+						 "12", "12",  "0",
+						  "0",  "0",  "0",
+					],
+					"output":1
+				}
+			]
+		},
+		"25": {
+			"name":"Note Block",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						  "5",  "5",  "5",
+						  "5","331",  "5",
+						  "5",  "5",  "5",
+					],
+					"output":1
+				}
+			]
+		},
+		"84": {
+			"name":"Jukebox",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						  "5",  "5",  "5",
+						  "5","264",  "5",
+						  "5",  "5",  "5",
+					],
+					"output":1
+				}
+			]
+		},
+		"261": {
+			"name":"Bow",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						  "0","280","287",
+						"280",  "0","287",
+						  "0","280","287",
+					],
+					"output":1
+				}
+			]
+		},
+		"264": {
+			"name":"Diamond",
+			"crafts": []
+		},
+		"265": {
+			"name":"Iron Ingot",
+			"crafts": []
+		},
+		"266": {
+			"name":"Gold Ingot",
+			"crafts": []
+		},
+		"274": {
+			"name":"Stone Pickaxe",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						  "4",  "4",  "4",
+						  "0","280",  "0",
+						  "0","280",  "0",
+					],
+					"output":1
+				}
+			]
+		},
+		"278": {
+			"name":"Diamond Pickaxe",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+					  "264","264","264",
+						  "0","280",  "0",
+						  "0","280",  "0",
+					],
+					"output":1
+				}
+			]
+		},
 		"280": {
 			"name":"Stick",
-			"icon":"res/icon/stick.png",
 			"crafts": [
 				{
 					"type":"workbench",
@@ -58,20 +202,27 @@
 				}
 			]
 		},
-		"274": {
-			"name":"Stone pickaxe",
-			"icon":"res/icon/stone_picaxe.png",
+		"285": {
+			"name":"Gold Pickaxe",
 			"crafts": [
 				{
 					"type":"workbench",
 					"input":[
-						  "4",  "4",  "4",
+						"266","266","266",
 						  "0","280",  "0",
 						  "0","280",  "0",
 					],
 					"output":1
 				}
 			]
+		},
+		"287": {
+			"name":"String",
+			"crafts": []
+		},
+		"331": {
+			"name":"Redstone",
+			"crafts": []
 		}
 	}
 }
