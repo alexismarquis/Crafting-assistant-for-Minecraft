@@ -59,6 +59,7 @@ public class IHM extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crafting Assistant for Minecraft");
@@ -105,6 +106,8 @@ public class IHM extends javax.swing.JFrame {
                     .addComponent(selectedItemLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(14, 14, 14)
@@ -138,7 +141,8 @@ public class IHM extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel7))))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(stepScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,12 +181,33 @@ public class IHM extends javax.swing.JFrame {
         
     }
     
+    public void setImgDifficulty(int diff){
+        switch(diff){
+            case 1:
+                jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/ratingstar1.png")));
+            break;
+            case 2:
+                jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/ratingstar2.png")));
+            break;
+            case 3:
+                jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/ratingstar3.png")));
+            break;
+            case 4:
+                jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/ratingstar4.png")));
+            break;
+            default:
+                jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcassist/images/ratingstar5.png")));
+            break;
+        }
+    }
+    
     public void setItem(Item item) {
         selectedItemLabel.setText(item.getName());
+        setImgDifficulty(item.getCrafts().get(0).craftDifficulty());
         steps.clear();
         resources.clear();
         HashMap<Item, Integer> items = item.getCrafts().get(0).StepByStepItem();
-        
+        System.out.println(item.getCrafts().get(0).craftDifficulty());
         for(Entry<Item, Integer> entry : items.entrySet()) {
             Integer quantity = entry.getValue();
             Item stepItem = entry.getKey();
@@ -235,7 +260,6 @@ public class IHM extends javax.swing.JFrame {
         for(Entry<String, Item> entry : cl.getItems().entrySet()) {
             String id = entry.getKey();
             Item item = entry.getValue();
-
             if(!item.isRessource()) {
 
                 final ItemView iv = new ItemView(item);
@@ -300,6 +324,7 @@ public class IHM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane resourcesScroll;
     private javax.swing.JLabel selectedItemLabel;
     private javax.swing.JScrollPane stepScroll;

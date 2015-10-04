@@ -5,7 +5,12 @@
  */
 package mcassist;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
+import java.io.FileReader;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
@@ -17,43 +22,56 @@ public class Craft {
    private Item[] items;
    private int nbCraft;
    private String type;
-    
+
     public Craft(Item[] items,int nbCraft, String type) {
         this.items = items;
         this.nbCraft = nbCraft;
         this.type = type;
     }
-    
+
+    public int craftDifficulty(){
+        int difficulty=0;
+        int nb=0;
+        HashMap<Item,Integer> listeRessource = StepByStepRessource();
+        Set<Item> listKeys=listeRessource.keySet();  // Obtenir la liste des clés
+        for (Item key : listKeys) {
+            difficulty += key.getDifficulty()*listeRessource.get(key);  
+            nb+= listeRessource.get(key);
+        }
+        difficulty /= nb;
+        return difficulty;
+    }
+
     public String getType() {
         return type;
     }
-    
+
     public int getNbCraft(){
         return nbCraft;
     }
-    
+
     public Item[] getItems() {
         return items;
     }
-    
+
    @Override
     public String toString(){
         String affiche = "";
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
                  affiche += "\n"+items[i].getName();
-            }    
+            }
         }
         return affiche;
     }
-    
+
     public LinkedHashMap<Item,Integer> init(LinkedHashMap<Item,Integer> map){
         if (map.isEmpty()) {
             return new LinkedHashMap<>();
         }
-            return map;      
+            return map;
     }
-    
+
     /**
      *
      * @param map
@@ -71,7 +89,7 @@ public class Craft {
         }
         return test;
     }
-    
+
     /**
      *
      * @param liste
@@ -82,12 +100,12 @@ public class Craft {
     public LinkedHashMap<Item,Integer> listRessource(){
          return listRessource(new LinkedHashMap<Item,Integer>(),new LinkedHashMap<Item,Integer>());
     }
-    
+
     private LinkedHashMap<Item,Integer> listRessource(LinkedHashMap<Item,Integer> liste,LinkedHashMap<Item,Integer> coffre){
         LinkedHashMap<Item,Integer> listeR; //HashMap Contenant la liste des item necessaire et leurs nombres
         LinkedHashMap<Item,Integer>coffret; //HashMap contenant les items en trops
         listeR = init(liste); //Initialisation
-        coffret = init(coffre);    
+        coffret = init(coffre);
         for (int i = 0; i < items.length; i++) {//Parcours des 9 case composant un craft
             if (items[i] != null){
                 if (items[i].isRessource()) { //Si l'item est une ressource
@@ -129,7 +147,7 @@ public class Craft {
         }
         return listeItem;
     }
-    
+
     public HashMap<Item,Integer> StepByStepRessource(){
         LinkedHashMap<Item,Integer> liste = listRessource();
         LinkedHashMap<Item,Integer> listeRessource = new LinkedHashMap<>();

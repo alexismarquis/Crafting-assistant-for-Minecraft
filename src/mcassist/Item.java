@@ -5,7 +5,13 @@
  */
 package mcassist;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +21,7 @@ public class Item {
     
     private String name;
     private String id;
+    private Integer difficulty=null;
     
     private ArrayList<Craft> crafts;
     
@@ -27,6 +34,14 @@ public class Item {
     public void addCraft(Craft craft) {
         this.crafts.add(craft);
     } 
+    
+    public int getDifficulty(){
+        return this.difficulty;
+    }
+    
+    public void setDifficulty(int diff){
+        this.difficulty = diff;
+    }
     
     public String getName() {
         return this.name;

@@ -14,15 +14,18 @@
 		},
 		"2": {
 			"name":"Grass",
-			"crafts": []
+			"crafts": [],
+			"difficulty": 1
 		},
 		"3": {
 			"name":"Dirt",
-			"crafts": []
+			"crafts": [],
+			"difficulty":1
 		},
 		"4": {
 			"name":"Cobblestone",
-			"crafts": []
+			"crafts": [],
+			"difficulty":1
 		},
 		"5": {
 			"name":"Wood planks",
@@ -40,23 +43,28 @@
 		},
 		"12": {
 			"name":"Sand",
-			"crafts": []
+			"crafts": [],
+			"difficulty":1
 		},
 		"14": {
 			"name":"Gold Ore",
-			"crafts": []
+			"crafts": [],
+			"difficulty":3
 		},
 		"15": {
 			"name":"Iron Ore",
-			"crafts": []
+			"crafts": [],
+			"difficulty":2
 		},
 		"16": {
 			"name":"Coal Ore",
-			"crafts": []
+			"crafts": [],
+			"difficulty":1
 		},
 		"17": {
 			"name":"Log",
-			"crafts": []
+			"crafts": [],
+			"difficulty":1
 		},
 		"20": {
 			"name":"Glass",
@@ -72,11 +80,13 @@
 		},
 		"21": {
 			"name":"Lapis Lazuli Ore",
-			"crafts": []
+			"crafts": [],
+			"difficulty":2
 		},
 		"22": {
 			"name":"Lapis Lazuli Block",
-			"crafts": []
+			"crafts": [],
+			"difficulty":3
 		},
 		"23": {
 			"name":"Dispenser",
@@ -148,6 +158,54 @@
 				}
 			]
 		},
+		"44": {
+			"name":"Stone Slab",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						"0","0",  "0",
+						"0","0",  "0",
+						  "1",  "1",  "1"
+					],
+					"output":6
+				}
+			]
+		},
+		"47":{
+			"name":"bookshelf",
+			"crafts":[
+				{
+					"type":"workbench",
+					"input":[
+						"5","5","5",
+						"340","340","340",
+						"5","5","5"
+					],
+					"output":1
+				}
+			]
+		},
+		"49": {
+			"name":"Obsidian",
+			"crafts": [],
+			"difficulty":3
+		},
+
+		"50": {
+			"name":"Torch",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						"0","263",  "0",
+						"0","280",  "0",
+						  "0",  "0",  "0"
+					],
+					"output":4
+				}
+			]
+		},
 		"84": {
 			"name":"Jukebox",
 			"crafts": [
@@ -157,6 +215,20 @@
 						  "5",  "5",  "5",
 						  "5","264",  "5",
 						  "5",  "5",  "5"
+					],
+					"output":1
+				}
+			]
+		},
+		"116": {
+			"name":"Enchanting Table",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						"0","340",  "0",
+						"264","49","264",
+						"49","49","49"
 					],
 					"output":1
 				}
@@ -176,17 +248,26 @@
 				}
 			]
 		},
+		"263":{
+			"name":"Coal",
+			"crafts": [],
+			"difficulty":1
+		},
+
 		"264": {
 			"name":"Diamond",
-			"crafts": []
+			"crafts": [],
+			"difficulty":4
 		},
 		"265": {
 			"name":"Iron Ingot",
-			"crafts": []
+			"crafts": [],
+			"difficulty":2
 		},
 		"266": {
 			"name":"Gold Ingot",
-			"crafts": []
+			"crafts": [],
+			"difficulty":3
 		},
 		"274": {
 			"name":"Stone Pickaxe",
@@ -197,6 +278,20 @@
 						  "4",  "4",  "4",
 						  "0","280",  "0",
 						  "0","280",  "0"
+					],
+					"output":1
+				}
+			]
+		},
+		"276": {
+			"name":"Diamond Sword",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						"0","264",  "0",
+						"0","264",  "0",
+						  "0",  "280",  "0"
 					],
 					"output":1
 				}
@@ -246,11 +341,93 @@
 		},
 		"287": {
 			"name":"String",
-			"crafts": []
+			"crafts": [],
+			"difficulty":2
+		},
+		"321": {
+			"name":"Painting",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						"280","280",  "280",
+						"280","35",  "280",
+						"280","280",  "280"
+					],
+					"output":1
+				}
+			]
 		},
 		"331": {
 			"name":"Redstone",
-			"crafts": []
+			"crafts": [],
+			"difficulty":2
+		},
+		"334":{
+			"name":"Leather",
+			"crafts": [],
+			"difficulty":2
+		},
+		"338": {
+			"name":"Sugar Cane",
+			"crafts": [],
+			"difficulty":2
+		},
+		"339": {
+			"name":"Paper",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						"0","0",  "0",
+						"0","0",  "0",
+						"338",  "338",  "338"
+					],
+					"output":3
+				}
+			]
+		},
+		"340": {
+			"name":"Book",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						"0","0",  "0",
+						"339","339",  "0",
+						"339",  "334",  "0"
+					],
+					"output":1
+				}
+			]
+		},
+		"374": {
+			"name":"Glass Bottle",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						"0","0",  "0",
+						"20","0",  "20",
+						  "0",  "20",  "0"
+					],
+					"output":3
+				}
+			]
+		},
+		"416": {
+			"name":"Armor Stand",
+			"crafts": [
+				{
+					"type":"workbench",
+					"input":[
+						"280","280",  "280",
+						"0","280",  "0",
+						  "280",  "44",  "280"
+					],
+					"output":1
+				}
+			]
 		}
 	}
 }

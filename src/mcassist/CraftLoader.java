@@ -39,8 +39,12 @@ public class CraftLoader {
             String id = member.getName();
             JsonObject jsonItem = member.getValue().asObject();
             String name = jsonItem.get("name").asString();
-            
+            JsonValue difficulty = jsonItem.get("difficulty");
             items.put(id, new Item(id, name));
+            if (difficulty != null) {
+               items.get(id).setDifficulty(difficulty.asInt()); 
+            }
+            
         }
         
         for (Member member : jsonItems) {
@@ -51,7 +55,7 @@ public class CraftLoader {
                 JsonObject jsonCraft = value.asObject();
                 String type = jsonCraft.get("type").asString();
                 Integer output = jsonCraft.get("output").asInt();
-                JsonArray jsonInput = jsonCraft.get("input").asArray();
+                JsonArray jsonInput = jsonCraft.get("input").asArray();        
                 
                 Item[] craftItems = new Item[jsonInput.size()];
                 
@@ -60,9 +64,7 @@ public class CraftLoader {
                     craftItems[i] = items.get(craftValue.asString());
                     i++;
                 }
-
                 items.get(id).addCraft(new Craft(craftItems, output, type));
-
             }
         }
 
