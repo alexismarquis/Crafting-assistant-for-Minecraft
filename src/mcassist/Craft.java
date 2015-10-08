@@ -32,19 +32,23 @@ public class Craft {
     public int craftDifficulty(){
         double difficulty=0;
         int nbDiff=0;
-        int nb=0;
+        int diffPlus=0;
+        int diffMoins=0;
         HashMap<Item,Integer> listeRessource = StepByStepRessource();
         Set<Item> listKeys=listeRessource.keySet();  // Obtenir la liste des clés
         for (Item key : listKeys) {
             difficulty += Math.pow(key.getDifficulty(),2)*listeRessource.get(key);//Affecte un coeff selon la difficutlé
             nbDiff += key.getDifficulty()*listeRessource.get(key);//Somme des difficultés
             if (key.getDifficulty()>=3) { 
-                nb += (listeRessource.get(key))/5; //Nombre d'item avec une difficulté superieur a 3
+                diffPlus += (listeRessource.get(key)); //Nombre d'item avec une difficulté superieur a 3
+            } 
+            if (key.getDifficulty()<3) { 
+                diffMoins += (listeRessource.get(key)); //Nombre d'item avec une difficulté inferieur a 3
             } 
         }
         difficulty /= nbDiff;
-        difficulty += nb;
         difficulty*=2;
+        difficulty += (diffPlus/3)+ (diffMoins/4);
         if (difficulty >10)difficulty = 10;
         return (int)Math.ceil(difficulty);
     }
